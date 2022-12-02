@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import { Link } from "react-router-dom";
-import { logout, selectIsAuth, authSlice } from "../../redux/slice/auth";
+import { Link } from 'react-router-dom';
+import { logout, selectIsAuth } from '../../redux/slice/auth';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './Header.module.scss';
@@ -14,6 +14,7 @@ export const Header = () => {
   const onClickLogout = () => {
     if (window.confirm('Дійсно вийти  ?')) {
       dispatch(logout());
+      window.localStorage.removeItem('token');
     }
   };
 
