@@ -3,6 +3,7 @@ import { fetchAuth, fetchAuthMe } from './authActionCreator';
 
 const initialState = {
   data: null,
+  user: null,
   isloading: false,
 };
 
@@ -29,6 +30,7 @@ export const authSlice = createSlice({
     [fetchAuthMe.fulfilled.type]: (state, action) => {
       state.isloading = false;
       state.data = action.payload;
+      state.user = action.payload;
     },
     [fetchAuthMe.pending.type]: (state) => {
       state.isloading = true;

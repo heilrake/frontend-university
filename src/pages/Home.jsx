@@ -3,16 +3,15 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Grid from '@mui/material/Grid';
 
-
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Post } from '../components/Post';
-import { TagsBlock } from '../components/TagsBlock';
-import { CommentsBlock } from '../components/CommentsBlock';
 import { fetchPosts } from '../redux/slice/postActionCreators';
+import { selectIsAuth } from '../redux/slice/auth';
 
 export const Home = () => {
   const { posts, isloading } = useSelector((state) => state.postsReducer);
+  const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,9 +26,11 @@ export const Home = () => {
       </Tabs>
       <Grid container spacing={4}>
         <Grid xs={8} item>
-          {(isloading ? [...Array(5)] : posts).map((post, index) => (
+          {(isloading ? [...Array(5)] : posts).map((post, index) =>
             isloading ? (
-              <Post isLoading={true} key={index}>Hello bob</Post>
+              <Post isLoading={true} key={index}>
+                Hello bob
+              </Post>
             ) : (
               <Post
                 id={post._id}
@@ -45,10 +46,10 @@ export const Home = () => {
                 commentsCount={3}
                 tags={['react', 'fun', 'typescript']}
                 isLoading={isloading}
-                isEditable
+                isEditable={isAuth}
               />
-            )
-          ))}
+            ),
+          )}
         </Grid>
       </Grid>
     </>

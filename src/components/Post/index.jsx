@@ -1,11 +1,11 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
-import { Box } from "@mui/material";
+import { Box } from '@mui/material';
 
 import { UserInfo } from '../UserInfo';
 import { PostSkeleton } from './Skeleton';
@@ -27,7 +27,7 @@ export const Post = ({
     return <PostSkeleton />;
   }
 
-  const onClickRemove = () => { };
+  const onClickRemove = () => {};
 
   return (
     <Box className={clsx(styles.root, { [styles.rootFull]: isFullPost })}>
