@@ -13,7 +13,6 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('here');
     dispatch(fetchAuthMe());
   });
   return (

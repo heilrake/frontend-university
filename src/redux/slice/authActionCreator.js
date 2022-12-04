@@ -6,14 +6,13 @@ export const fetchAuth = createAsyncThunk('posts/fetchAuth', async (data) => {
     const response = await instance.post('/auth/login', data);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.warn(error);
   }
 });
 
 export const fetchAuthMe = createAsyncThunk('posts/fetchAuthMe', async () => {
   try {
     const response = await instance.get('/auth/me');
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);

@@ -10,17 +10,31 @@ import styles from './AddPost.module.scss';
 import { useSelector } from 'react-redux';
 import { selectIsAuth } from '../../redux/slice/auth';
 import { Navigate } from 'react-router-dom';
+import instance from '../../axios';
 
 export const AddPost = () => {
-  const imageUrl = '';
   const isAuth = useSelector(selectIsAuth);
   const [value, setValue] = useState('');
   const [title, setTitle] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const inputFileRef = useRef(null);
 
-  const handleChangeFile = () => {};
-
-  const onClickRemoveImage = () => {};
+  const handleChangeFile = async (event) => {
+    try {
+      const formData = new FormData();
+      const file = event.target.files[0];
+      formData.append('image', file);
+      const { data } = await instance.post('/upload', formData);
+      setImageUrl(data.url);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(imageUrl);
+  const onClickRemoveImage = () => {
+    setImageUrl('');
+  };
 
   const onChange = useCallback((value) => {
     setValue(value);
@@ -52,19 +66,19 @@ export const AddPost = () => {
       </Button>
       <input ref={inputFileRef} type="file" onChange={handleChangeFile} hidden />
       {imageUrl && (
-        <Button variant="contained" color="error" onClick={onClickRemoveImage}>
-          Видалити
-        </Button>
-      )}
-      {imageUrl && (
-        <img className={styles.image} src={`http://localhost:4444${imageUrl}`} alt="Uploaded" />
+        <>
+          <Button variant="contained" color="error" onClick={onClickRemoveImage}>
+            Видалити
+          </Button>
+          <img className={styles.image} src={`http://localhost:4444${imageUrl}`} alt="Uploaded" />
+        </>
       )}
       <br />
       <br />
       <TextField
         classes={{ root: styles.title }}
         variant="standard"
-        placeholder="Заголовок статьи..."
+        placeholder="Заголовок публікації..."
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         fullWidth
@@ -73,7 +87,7 @@ export const AddPost = () => {
       <SimpleMDE className={styles.editor} value={value} onChange={onChange} options={options} />
       <div className={styles.buttons}>
         <Button size="large" variant="contained">
-          Опубликовать
+          Опублікувати
         </Button>
         <Link href="/">
           <Button size="large">Отмена</Button>
