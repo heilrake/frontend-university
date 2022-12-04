@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import SimpleMDE from 'react-simplemde-editor';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import 'easymde/dist/easymde.min.css';
 import styles from './AddPost.module.scss';
@@ -11,10 +11,13 @@ import { useSelector } from 'react-redux';
 import { selectIsAuth } from '../../redux/slice/auth';
 import { Navigate } from 'react-router-dom';
 import instance from '../../axios';
+import toast from 'react-hot-toast';
 
 export const AddPost = () => {
   const isAuth = useSelector(selectIsAuth);
-  const [value, setValue] = useState('');
+  const navigate = useNavigate();
+
+  const [text, setText] = useState('');
   const [title, setTitle] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -31,13 +34,13 @@ export const AddPost = () => {
       console.log(error);
     }
   };
-  console.log(imageUrl);
+
   const onClickRemoveImage = () => {
     setImageUrl('');
   };
 
   const onChange = useCallback((value) => {
-    setValue(value);
+    setText(value);
   }, []);
 
   const options = useMemo(
@@ -58,6 +61,19 @@ export const AddPost = () => {
   if (!window.localStorage.getItem('token') && !isAuth) {
     return <Navigate to="/" />;
   }
+
+  const onSubmit = async () => {
+    try {
+      setIsLoading(true);
+
+      const { data } = await instance.post('/posts', { title, text, imageUrl });
+      const id = data._id;
+
+      navigate(`/posts/${id}`);
+    } catch (error) {
+      toast.error(error);
+    }
+  };
 
   return (
     <Paper style={{ padding: 30 }}>
@@ -84,9 +100,9 @@ export const AddPost = () => {
         fullWidth
       />
       {/* <TextField classes={{ root: styles.tags }} variant="standard" placeholder="Тэги" fullWidth /> */}
-      <SimpleMDE className={styles.editor} value={value} onChange={onChange} options={options} />
+      <SimpleMDE className={styles.editor} value={text} onChange={onChange} options={options} />
       <div className={styles.buttons}>
-        <Button size="large" variant="contained">
+        <Button onClick={onSubmit} size="large" variant="contained">
           Опублікувати
         </Button>
         <Link href="/">

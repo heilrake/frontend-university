@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 
 import { Header } from './components';
-import { Home, FullPost, Registration, AddPost, Login } from './pages';
+import { Home, FullPost, AddPost, Login } from './pages';
+import AboutMuseum from './pages/AboutMuseum';
+import Exposure from './pages/Exposure';
 import { selectIsAuth } from './redux/slice/auth';
 import { fetchAuthMe } from './redux/slice/authActionCreator';
 
@@ -24,7 +26,8 @@ const App = () => {
           <Route path="/posts/:id" element={<FullPost />} />
           <Route path="/add-post" element={<AddPost />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Registration />} />
+          <Route path="/about" element={<AboutMuseum />} />
+          <Route path="/exposure" element={<Exposure />} />
         </Routes>
       </Container>
     </>

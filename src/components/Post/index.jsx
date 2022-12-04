@@ -12,17 +12,7 @@ import { PostSkeleton } from './Skeleton';
 
 import styles from './Post.module.scss';
 
-export const Post = ({
-  id,
-  title,
-  createdAt,
-  imageUrl,
-  user,
-  children,
-  isFullPost,
-  isLoading,
-  isEditable,
-}) => {
+export const Post = ({ id, title, imageUrl, children, isFullPost, isLoading, isEditable }) => {
   if (isLoading) {
     return <PostSkeleton />;
   }
@@ -51,7 +41,6 @@ export const Post = ({
         />
       )}
       <Box className={styles.wrapper}>
-        <UserInfo {...user} additionalText={createdAt} />
         <Box className={styles.indention}>
           <h2 className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
             {isFullPost ? title : <Link to={`/posts/${id}`}>{title}</Link>}

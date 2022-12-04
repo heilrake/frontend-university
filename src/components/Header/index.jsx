@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './Header.module.scss';
 import Container from '@mui/material/Container';
+import { Box } from '@mui/material';
 
 export const Header = () => {
   const isAuth = useSelector(selectIsAuth);
@@ -25,24 +26,20 @@ export const Header = () => {
           <Link className={styles.logo} to="/">
             <div>Краєзнавчий музей</div>
           </Link>
+          <Box className={styles.navigation}>
+            <Link to="/">Про музей</Link>
+            <Link to="/exposure">Експонати</Link>
+            <Link to="/about">Відвідувачам</Link>
+          </Box>
           <div className={styles.buttons}>
-            {isAuth ? (
+            {isAuth && (
               <>
                 <Link to="/add-post">
-                  <Button variant="contained">Добавить статью</Button>
+                  <Button variant="contained">Додати нову статтю</Button>
                 </Link>
                 <Button onClick={onClickLogout} variant="contained" color="error">
-                  Выйти
+                  Вийти
                 </Button>
-              </>
-            ) : (
-              <>
-                <Link to="/login">
-                  <Button variant="outlined">Войти</Button>
-                </Link>
-                <Link to="/register">
-                  <Button variant="contained">Создать аккаунт</Button>
-                </Link>
               </>
             )}
           </div>
