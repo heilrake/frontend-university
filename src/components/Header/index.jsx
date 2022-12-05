@@ -1,19 +1,22 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { logout, selectIsAuth } from '../../redux/slice/auth';
 import { useDispatch, useSelector } from 'react-redux';
 
-import styles from './Header.module.scss';
 import Container from '@mui/material/Container';
 import { Box } from '@mui/material';
+import { LINKS } from '../../helpers/links';
+
+import styles from './Header.module.scss';
 
 export const Header = () => {
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const onClickLogout = () => {
-    if (window.confirm('Дійсно вийти  ?')) {
+    if (window.confirm('Дійсно вийти ?')) {
       dispatch(logout());
       window.localStorage.removeItem('token');
     }
@@ -23,22 +26,34 @@ export const Header = () => {
     <div className={styles.root}>
       <Container maxWidth="lg">
         <div className={styles.inner}>
-          <Link className={styles.logo} to="/">
-            <div>Краєзнавчий музей</div>
-          </Link>
+          <Button
+            color='secondary'
+            variant="contained"
+            onClick={() => navigate(LINKS.home)}
+            className={styles.logo}
+          >
+            Краєзнавчий музей
+          </Button>
           <Box className={styles.navigation}>
-            <Link to="/">Про музей</Link>
-            <Link to="/exposure">Експонати</Link>
-            <Link to="/about">Відвідувачам</Link>
-            <Link to="/about">Контакти</Link>
+            <Button onClick={() => navigate(LINKS.about)}>Про музей</Button>
+            <Button onClick={() => navigate(LINKS.exposure)}>Експонати</Button>
+            <Button onClick={() => navigate(LINKS.about)}>Відвідувачам</Button>
+            <Button onClick={() => navigate(LINKS.contact)}>Контакти</Button>
           </Box>
           <div className={styles.buttons}>
             {isAuth && (
               <>
                 <Link to="/add-post">
-                  <Button variant="contained">Додати нову статтю</Button>
+                  <Button
+                    color='warning'
+                    variant="contained"
+                  >Додати нову статтю</Button>
                 </Link>
-                <Button onClick={onClickLogout} variant="contained" color="error">
+                <Button
+                  onClick={onClickLogout}
+                  variant="contained"
+                  color="error"
+                >
                   Вийти
                 </Button>
               </>

@@ -92,7 +92,7 @@ export const AddPost = () => {
       <br />
       <br />
       <TextField
-        classes={{ root: styles.title }}
+        b={{ root: styles.title }}
         variant="standard"
         placeholder="Заголовок публікації..."
         value={title}
