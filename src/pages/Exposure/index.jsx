@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import Grid from '@mui/material/Grid';
 import { useSelector, useDispatch } from 'react-redux';
+import { Box } from '@mui/material';
 
 import { Post } from '../../components/Post';
+
 import { fetchPosts } from '../../redux/slice/postActionCreators';
 import { selectIsAuth } from '../../redux/slice/auth';
 
@@ -14,28 +15,19 @@ const Exposure = () => {
   useEffect(() => {
     dispatch(fetchPosts());
   }, []);
+
   return (
-    <>
-      <Grid container spacing={4}>
-        <Grid xs={8} item>
-          {(isloading ? [...Array(5)] : posts).map((post, index) =>
-            isloading ? (
-              <Post isLoading={true} key={index}>
-                Hello bob
-              </Post>
-            ) : (
-              <Post
-                id={post._id}
-                title={post.title}
-                imageUrl={post.imageUrl ? `http://localhost:4444${post.imageUrl}` : ''}
-                isLoading={isloading}
-                isEditable={isAuth}
-              />
-            ),
-          )}
-        </Grid>
-      </Grid>
-    </>
+    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+      {posts.map((post, index) =>
+        <Post
+          id={post._id}
+          title={post.title}
+          imageUrl={post.imageUrl ? `http://localhost:4444${post.imageUrl}` : ''}
+          isLoading={isloading}
+          isEditable={isAuth}
+        />
+      )}
+    </Box>
   );
 };
 export default Exposure;
