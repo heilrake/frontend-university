@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchPosts } from "./postActionCreators";
+import { fetchPosts, fetchRemovePost } from "./postActionCreators";
 
 const initialState = {
   posts: [],
@@ -21,6 +21,10 @@ export const postsSlice = createSlice({
     [fetchPosts.rejected.type]: (state, action) => {
       state.isloading = true;
       state.error = action.payload;
+    },
+    //=====================================
+    [fetchRemovePost.pending.type]: (state, action) => {
+      state.posts = state.posts.filter(obj => obj._id == action.meta.arg)
     },
   }
 });

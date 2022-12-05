@@ -11,4 +11,6 @@ export const fetchPosts = createAsyncThunk(
       console.log(error)
     }
   }
-)
+);
+
+export const fetchRemovePost = createAsyncThunk('post/fetchRemovePost', async (id) => await instance.delete(`/posts/${id}`))

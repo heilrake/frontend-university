@@ -7,17 +7,21 @@ import DeleteIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import { Box } from '@mui/material';
 
-import { UserInfo } from '../UserInfo';
+import { fetchRemovePost } from '../../redux/slice/postActionCreators';
 import { PostSkeleton } from './Skeleton';
 
 import styles from './Post.module.scss';
+import { useDispatch } from 'react-redux';
 
 export const Post = ({ id, title, imageUrl, children, isFullPost, isLoading, isEditable }) => {
+  const dispatch = useDispatch();
   if (isLoading) {
     return <PostSkeleton />;
   }
 
-  const onClickRemove = () => {};
+  const onClickRemove = () => {
+    dispatch(fetchRemovePost(id));
+  };
 
   return (
     <Box className={clsx(styles.root, { [styles.rootFull]: isFullPost })}>
