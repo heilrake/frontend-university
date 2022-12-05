@@ -14,7 +14,6 @@ const Exposure = () => {
   useEffect(() => {
     dispatch(fetchPosts());
   }, []);
-
   return (
     <>
       <Grid container spacing={4}>

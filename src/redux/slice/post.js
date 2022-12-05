@@ -24,7 +24,7 @@ export const postsSlice = createSlice({
     },
     //=====================================
     [fetchRemovePost.pending.type]: (state, action) => {
-      state.posts = state.posts.filter(obj => obj._id == action.meta.arg)
+      state.posts = state.posts.filter(obj => obj._id !== action.meta.arg)
     },
   }
 });
