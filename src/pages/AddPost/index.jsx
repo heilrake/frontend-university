@@ -1,20 +1,22 @@
-import { useState, useCallback, useMemo, useRef } from 'react';
+import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import SimpleMDE from 'react-simplemde-editor';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 
 import 'easymde/dist/easymde.min.css';
-import styles from './AddPost.module.scss';
-import { useSelector } from 'react-redux';
 import { selectIsAuth } from '../../redux/slice/auth';
 import { Navigate } from 'react-router-dom';
 import instance from '../../axios';
-import toast from 'react-hot-toast';
+
+import styles from './AddPost.module.scss';
 
 export const AddPost = () => {
   const isAuth = useSelector(selectIsAuth);
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [text, setText] = useState('');
@@ -22,6 +24,7 @@ export const AddPost = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const inputFileRef = useRef(null);
+  const isEditing = Boolean(id);
 
   const handleChangeFile = async (event) => {
     try {
@@ -58,6 +61,18 @@ export const AddPost = () => {
     [],
   );
 
+  useEffect(() => {
+    if (id) {
+      instance.get(`/posts/${id}`).then(({ data }) => {
+        setText(data.text)
+        setTitle(data.title)
+        setImageUrl(data.imageUrl)
+      }).catch((error) => {
+        console.log(error);
+      })
+    }
+  }, [])
+
   if (!window.localStorage.getItem('token') && !isAuth) {
     return <Navigate to="/" />;
   }
@@ -65,11 +80,11 @@ export const AddPost = () => {
   const onSubmit = async () => {
     try {
       setIsLoading(true);
+      const allInfo = { title, text, imageUrl }
+      const { data } = isEditing ? await instance.patch(`/posts/${id}`, allInfo) : await instance.post('/posts', allInfo)
+      const _id = isEditing ? id : data._id;
 
-      const { data } = await instance.post('/posts', { title, text, imageUrl });
-      const id = data._id;
-
-      navigate(`/posts/${id}`);
+      navigate(`/posts/${_id}`);
     } catch (error) {
       toast.error(error);
     }
@@ -103,7 +118,7 @@ export const AddPost = () => {
       <SimpleMDE className={styles.editor} value={text} onChange={onChange} options={options} />
       <div className={styles.buttons}>
         <Button onClick={onSubmit} size="large" variant="contained">
-          Опублікувати
+          {isEditing ? 'Зберегти' : 'Опублікувати'}
         </Button>
         <Link href="/">
           <Button size="large">Отмена</Button>

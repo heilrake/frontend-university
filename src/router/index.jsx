@@ -6,7 +6,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import routes from "./routes";
 
 const Router = () => {
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
 
   return (
     <>
