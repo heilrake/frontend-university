@@ -30,6 +30,7 @@ export const Header = () => {
             <Link to="/">Про музей</Link>
             <Link to="/exposure">Експонати</Link>
             <Link to="/about">Відвідувачам</Link>
+            <Link to="/about">Контакти</Link>
           </Box>
           <div className={styles.buttons}>
             {isAuth && (
