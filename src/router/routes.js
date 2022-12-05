@@ -1,9 +1,10 @@
 import { AddPost, FullPost, Home, Login } from "../pages";
-import AboutMuseum from "../pages/AboutMuseum";
+import ForUser from "../pages/ForUser";
 import Exposure from "../pages/Exposure";
 import Contact from "../pages/Contact";
 
 import { LINKS } from "../helpers/links";
+import AboutMuseum from "../pages/AboutMuseum";
 
 const routes = [
   {
@@ -25,6 +26,10 @@ const routes = [
   {
     path: LINKS.login,
     element: <Login />,
+  },
+  {
+    path: LINKS.forUser,
+    element: <ForUser />
   },
   {
     path: LINKS.about,

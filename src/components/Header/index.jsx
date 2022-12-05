@@ -35,9 +35,9 @@ export const Header = () => {
             Краєзнавчий музей
           </Button>
           <Box className={styles.navigation}>
-            <Button onClick={() => navigate(LINKS.about)}>Про музей</Button>
+            <Button onClick={() => navigate(LINKS.about)}>Історія музей</Button>
             <Button onClick={() => navigate(LINKS.exposure)}>Експонати</Button>
-            <Button onClick={() => navigate(LINKS.about)}>Відвідувачам</Button>
+            <Button onClick={() => navigate(LINKS.forUser)}>Відвідувачам</Button>
             <Button onClick={() => navigate(LINKS.contact)}>Контакти</Button>
           </Box>
           <div className={styles.buttons}>
