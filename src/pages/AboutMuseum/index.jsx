@@ -32,7 +32,7 @@ const AboutMuseum = () => {
           <Typography>- дорослі – 45 грн. (з вхідною платою 30,00 грн.) – 45,00 грн.</Typography>
         </Box>
       </Box>
-      <Box style={{ borderBottom: '2px solid gray', marginBottom: '35px', padding: '30px 0' }}>
+      <Box style={{ marginBottom: '55px', padding: '30px 0' }}>
         <Typography variant="h4" gutterBottom>
           Індивідуальне екскурсійне обслуговування групи від 1 особи
         </Typography>

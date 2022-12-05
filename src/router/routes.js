@@ -1,39 +1,42 @@
 import { AddPost, FullPost, Home, Login } from "../pages";
 import AboutMuseum from "../pages/AboutMuseum";
 import Exposure from "../pages/Exposure";
+import Contact from "../pages/Contact";
+
+import { LINKS } from "../helpers/links";
 
 const routes = [
   {
-    path: '/',
+    path: LINKS.home,
     element: <Home />
   },
   {
-    path: '/posts/:id',
+    path: LINKS.fullPost,
     element: <FullPost />
   },
   {
-    path: '/posts/:id',
-    element: <FullPost />
-  },
-  {
-    path: '/posts/:id/edit',
+    path: LINKS.editPost,
     element: <AddPost />
   },
   {
-    path: '/add-post',
+    path: LINKS.addPost,
     element: <AddPost />
   },
   {
-    path: '/login',
+    path: LINKS.login,
     element: <Login />,
   },
   {
-    path: '/about',
+    path: LINKS.about,
     element: <AboutMuseum />
   },
   {
-    path: '/exposure',
+    path: LINKS.exposure,
     element: <Exposure />
+  },
+  {
+    path: LINKS.contact,
+    element: <Contact />
   },
 ]
 

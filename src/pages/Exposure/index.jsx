@@ -29,7 +29,6 @@ const Exposure = () => {
                 id={post._id}
                 title={post.title}
                 imageUrl={post.imageUrl ? `http://localhost:4444${post.imageUrl}` : ''}
-                createdAt={'12 июня 2022 г.'}
                 isLoading={isloading}
                 isEditable={isAuth}
               />
