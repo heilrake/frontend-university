@@ -1,9 +1,8 @@
-import React from "react";
 import { Paper, Box, Typography, TextField, Button } from "@mui/material";
-import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import toast from "react-hot-toast";
 import { Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import toast from "react-hot-toast";
 
 import { fetchAuth } from "../../redux/slice/authActionCreator";
 import { selectIsAuth } from "../../redux/slice/auth";
@@ -15,7 +14,7 @@ export const Login = () => {
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
 
-  const { register, handleSubmit, setError, reset, formState: { errors, isValid } } = useForm({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues: {
       email: '',
       password: ''

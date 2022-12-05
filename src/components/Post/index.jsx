@@ -1,23 +1,19 @@
 import React from 'react';
-import clsx from 'clsx';
-import { Link } from 'react-router-dom';
 
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Box } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
-import { Box } from '@mui/material';
+import clsx from 'clsx';
 
 import { fetchRemovePost } from '../../redux/slice/postActionCreators';
-import { PostSkeleton } from './Skeleton';
 
 import styles from './Post.module.scss';
-import { useDispatch } from 'react-redux';
 
 export const Post = ({ id, title, imageUrl, children, isFullPost, isLoading, isEditable }) => {
   const dispatch = useDispatch();
-  if (isLoading) {
-    return <PostSkeleton />;
-  }
 
   const onClickRemove = () => {
     dispatch(fetchRemovePost(id));

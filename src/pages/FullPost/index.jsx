@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Box, CircularProgress } from '@mui/material';
+import ReactMarkdown from 'react-markdown';
 import toast from 'react-hot-toast';
 
-import ReactMarkdown from 'react-markdown';
-
 import instance from '../../axios';
-import { Box, CircularProgress } from '@mui/material';
 import { Post } from '../../components/Post';
 
 import styles from './FullPost.module.scss';
