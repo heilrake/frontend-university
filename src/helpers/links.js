@@ -6,5 +6,6 @@ export const LINKS = {
   about: '/about',
   exposure: '/exposure',
   editPost: '/posts/:id/edit',
-  contact: '/contact'
+  contact: '/contact',
+  forUser: '/for-user'
 }
