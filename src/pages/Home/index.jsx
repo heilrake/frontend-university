@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
-import { fontSize } from '@mui/system';
 
 import styles from './Home.module.scss';
+
 export const Home = () => {
   return (
     <Box>

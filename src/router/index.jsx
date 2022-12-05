@@ -13,10 +13,8 @@ const Router = () => {
       {pathname !== '/login' && <Header />}
       <Container maxWidth="lg">
         <Routes>
-          {routes.map((route) => (
-            <>
-              <Route path={route.path} element={route.element} />
-            </>
+          {routes.map((route, index) => (
+            <Route key={index} path={route.path} element={route.element} />
           ))}
         </Routes>
       </Container>

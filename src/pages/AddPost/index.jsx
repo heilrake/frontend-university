@@ -1,17 +1,14 @@
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
-import TextField from '@mui/material/TextField';
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
-import SimpleMDE from 'react-simplemde-editor';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import { Link, useNavigate, useParams, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { TextField, Paper, Button } from '@mui/material';
+import SimpleMDE from 'react-simplemde-editor';
+import toast from 'react-hot-toast';
+
+import instance from '../../axios';
+import { selectIsAuth } from '../../redux/slice/auth';
 
 import 'easymde/dist/easymde.min.css';
-import { selectIsAuth } from '../../redux/slice/auth';
-import { Navigate } from 'react-router-dom';
-import instance from '../../axios';
-
 import styles from './AddPost.module.scss';
 
 export const AddPost = () => {

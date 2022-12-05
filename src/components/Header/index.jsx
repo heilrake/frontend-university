@@ -1,11 +1,11 @@
-import React from 'react';
 import Button from '@mui/material/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import { logout, selectIsAuth } from '../../redux/slice/auth';
 import { useDispatch, useSelector } from 'react-redux';
-
-import Container from '@mui/material/Container';
 import { Box } from '@mui/material';
+import Container from '@mui/material/Container';
+
+import { logout, selectIsAuth } from '../../redux/slice/auth';
+
 import { LINKS } from '../../helpers/links';
 
 import styles from './Header.module.scss';
