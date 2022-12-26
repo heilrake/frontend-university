@@ -21,6 +21,7 @@ export const Home = () => {
         </Box>
         <Box>
           <img
+            className={styles.image}
             src="https://uk.yonik.me/images/0/997/cherkassy-regional-museum.jpg"
             alt="alt museum"
           />
