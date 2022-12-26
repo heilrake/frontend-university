@@ -21,7 +21,7 @@ export const Home = () => {
         </Box>
         <Box>
           <img
-            src="https://lh3.googleusercontent.com/p/AF1QipNUD-YRy552Yr8oAzmUVsJgwvgAv8sfuczrsdwE=s680-w680-h510"
+            src="https://uk.yonik.me/images/0/997/cherkassy-regional-museum.jpg"
             alt="alt museum"
           />
         </Box>
